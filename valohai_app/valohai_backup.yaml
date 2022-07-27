@@ -1,0 +1,108 @@
+- step:
+    name: run_training
+    image: tensorflow/tensorflow:2.6.0-gpu
+    command:
+    - pip install -r requirements.txt
+    - python run_training.py {parameters}
+    parameters:
+    - name: batch_size
+      default: 32
+      multiple-separator: ','
+      optional: false
+      type: integer
+    - name: image_width
+      default: 160
+      multiple-separator: ','
+      optional: false
+      type: integer
+    - name: image_height
+      default: 160
+      multiple-separator: ','
+      optional: false
+      type: integer
+    - name: image_channels
+      default: 3
+      multiple-separator: ','
+      optional: false
+      type: integer
+    - name: learning_rate
+      default: 0.0001
+      multiple-separator: ','
+      optional: false
+      type: float
+    - name: metrics
+      default: accuracy
+      multiple-separator: ','
+      optional: false
+      type: string
+    - name: epochs
+      default: 5
+      multiple-separator: ','
+      optional: false
+      type: integer
+    inputs:
+    - name: dataset
+      default: s3://valohai-demo-badbc3cb/data/cats_and_dogs_filtered.zip
+      optional: false
+ 
+- step:
+    name: run_inference
+    image: tensorflow/tensorflow:2.6.0
+    command:
+    - pip install -r requirements.txt
+    - python run_inference.py {parameters}
+    inputs:
+    - name: model
+      default: s3://valohai-demo-badbc3cb/data/01G3Y/01G3Y4A21NF5ZNN6QDW5AK4J4E/output-27/model_output.zip
+    - name: labels
+      default: s3://valohai-demo-badbc3cb/data/01G3Y/01G3Y4A21NF5ZNN6QDW5AK4J4E/output-27/labels.pkl
+    - name: images
+      default: s3://path-e-a9ca1ae6/inputs/images/inference_set/*
+
+- step:
+    name: sandbox
+    image: tensorflow/tensorflow:2.6.0
+    command:
+    - pip install -r requirements.txt
+    - python sandbox.py {parameters}
+    parameters:
+    - name: batch_size
+      default: 32
+      multiple-separator: ','
+      optional: false
+      type: integer
+    - name: image_width
+      default: 160
+      multiple-separator: ','
+      optional: false
+      type: integer
+    - name: image_height
+      default: 160
+      multiple-separator: ','
+      optional: false
+      type: integer
+    - name: image_channels
+      default: 3
+      multiple-separator: ','
+      optional: false
+      type: integer
+    - name: learning_rate
+      default: 0.0001
+      multiple-separator: ','
+      optional: false
+      type: float
+    - name: metrics
+      default: accuracy
+      multiple-separator: ','
+      optional: false
+      type: string
+    - name: epochs
+      default: 5
+      multiple-separator: ','
+      optional: false
+      type: integer
+    inputs:
+    - name: images
+      default: s3://path-e-a9ca1ae6/inputs/images/inference_set/*
+    - name: dataset
+      default: s3://valohai-demo-badbc3cb/data/cats_and_dogs_filtered.zip

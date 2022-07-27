@@ -1,0 +1,7 @@
+name: "Create Valohai execution on push"
+description: "Run a new execution on app.valohai.com on each new push to repository"
+author: "Jason@IkonosAnalytics.com"
+ 
+runs:
+  using: "docker"
+  image: "Dockerfile"

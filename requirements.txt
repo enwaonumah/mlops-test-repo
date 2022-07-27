@@ -1,0 +1,9 @@
+Matplotlib
+Pillow
+python-dotenv
+PyYAML
+scikit-learn
+tensorflow
+tensorflow-hub
+valohai-cli
+valohai-utils
