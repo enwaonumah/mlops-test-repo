@@ -1,0 +1,4 @@
+- step:
+    name: train-model
+    command: python train.py
+    image: tensorflow/tensorflow:2.6.0
