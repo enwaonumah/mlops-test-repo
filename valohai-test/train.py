@@ -1,5 +1,6 @@
 import numpy as np
 import tensorflow as tf
+import valohai
  
 input_path = 'valohai-test/mnist.npz'
 with np.load(input_path, allow_pickle=True) as f:
@@ -24,5 +25,5 @@ model.fit(x_train, y_train, epochs=5)
  
 model.evaluate(x_test,  y_test, verbose=2)
  
-output_path = 'model.h5'
+output_path = valohai.outputs.path('model.h5')
 model.save(output_path)
