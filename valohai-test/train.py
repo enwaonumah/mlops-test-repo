@@ -3,7 +3,7 @@ import tensorflow as tf
 import valohai
 
 input_path = {
-    valohai.inputs('datasets').path() #'valohai-test/mnist.npz'
+    'default': 's3://valohai-demo-badbc3cb/data/mnist.npz'
 }
 
 valohai.prepare(
@@ -12,7 +12,7 @@ valohai.prepare(
     default_inputs= input_path,
     default_parameters={
         'learning_rate': 0.001,
-        'epoch': 10,
+        'epoch': 5,
     },
 )
 

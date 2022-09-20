@@ -5,16 +5,16 @@
     - pip install -r requirements.txt
     - python valohai-test/train.py {parameters}
     parameters:
+    - name: epoch
+      default: 10
+      multiple-separator: ','
+      optional: false
+      type: integer
     - name: learning_rate
       default: 0.001
       multiple-separator: ','
       optional: false
       type: float
-    - name: epoch
-      default: 5
-      multiple-separator: ','
-      optional: false
-      type: integer
     inputs:
     - name: default
       default: s3://valohai-demo-badbc3cb/data/mnist.npz
